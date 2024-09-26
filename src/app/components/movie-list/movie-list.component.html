@@ -1,0 +1,40 @@
+<input type="text" [(ngModel)]="searchString" (ngModelChange)="filterMovies('byString', searchString)" placeholder="Search movies...">
+<div>
+  <h4>Filter by Genre:</h4>
+  <ul>
+    <li *ngFor="let genreFilter of genreFilterState">
+      {{genreFilter}}
+    </li>
+  </ul>
+  <div>
+    <div *ngFor="let genre of genres" class="genres-box">
+      <input type="button" value="{{genre}}" (click)="filterMovies('byGenre', genre)"/>
+    </div>
+  </div>
+  <h4>Filter By Language:</h4>
+  <ul>
+    <li *ngFor="let languageFilter of languageFilterState">
+      {{languageFilter}}
+    </li>
+  </ul>
+  <div>
+    <div *ngFor="let language of languages" class="genres-box">
+      <input type="button" value="{{language}}" (click)="filterMovies('byLanguage', language)"/>
+    </div>
+  </div>
+</div>
+<ul>
+  <li *ngFor="let movie of filteredMovies" class="movie-list-item">
+    <div class="movie-box">
+      <h4>{{ movie.Title }} ({{ movie.Year }})</h4>
+      <p>Director: {{movie.Director}}</p>
+      <p>Genres: <b>{{ movie.Genre }}</b></p>
+      <p>Language: <b>{{ movie.Language }}</b></p>
+      <p>Actors: {{ movie.Actors }}</p>
+      <div class="plot">
+        <i>{{movie.Plot}}</i>
+      </div>
+    </div>
+   
+  </li>
+</ul>

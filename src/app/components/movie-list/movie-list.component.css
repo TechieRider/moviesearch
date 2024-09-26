@@ -1,0 +1,20 @@
+.movie-box {
+    border: 1px solid rgb(195, 11, 252);
+    border-radius: 5px;
+    background-color: rgb(206, 173, 236);
+    padding: 10px;
+}
+
+.movie-list-item {
+    list-style-type: none;
+    margin-top: 10px;
+}
+
+.plot {
+    margin-top: 5px;
+}
+
+.genres-box {
+    display: inline-block;
+    margin-right: 5px;
+}
