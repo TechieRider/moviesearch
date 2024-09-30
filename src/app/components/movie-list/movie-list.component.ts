@@ -2,15 +2,21 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from '../../../service/movie.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field'
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { extractUniqueGenres, createApplicableGenreFilter, extractUniqueLanguages, createApplicableLanguageFilter } from '../../../helpers/syntaxConverter';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { FilterAccordionComponent } from '../../filter-accordion/filter-accordion.component';
 
 @Component({
   selector: 'app-movie-list',
   templateUrl: './movie-list.component.html',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, FilterAccordionComponent, MatIconModule, MatInputModule, MatFormFieldModule],
   styleUrls: ['./movie-list.component.css']
 })
 
@@ -22,6 +28,9 @@ export class MovieListComponent implements OnInit {
   genreFilterState: any[] = [];
   languageFilterState: any[] = [];
   searchString: string = '';
+  clearMessage = 'Clear';
+  accordionHeader: string = 'Filter by genres';
+  accordionHeader2: string = 'Filter by languages';
   private destroy$ = new Subject<void>();
 
   constructor(private movieService: MovieService) {}
@@ -75,12 +84,10 @@ export class MovieListComponent implements OnInit {
       : filteredMovies;
   }
   
-  
-  
 
   filterMoviesByString(searchString: string) {
     const lowerCaseSearch = searchString.toLowerCase();
-    const fieldsToSearch = ['Title', 'Actors', 'Director'];
+    const fieldsToSearch = ['Title', 'Actors', 'Director', 'Plot'];
     this.searchString = searchString;
     
     return this.filteredMovies.filter(movie => 
@@ -89,4 +96,16 @@ export class MovieListComponent implements OnInit {
       )
     );
   } 
+
+  updateFilter(event: { filterCategory: 'byString' | 'byGenre' | 'byLanguage', filterTile: string }) {
+    this.filterMovies(event.filterCategory, event.filterTile);
+  }
+
+  reset() {
+    this.filteredMovies = this.movies;
+    this.searchString = '';
+    this.genreFilterState = [];
+    this.languageFilterState = [];
+  }
+  
 }

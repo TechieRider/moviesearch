@@ -1,0 +1,27 @@
+  <mat-accordion>
+    <mat-expansion-panel class="accordion-layout">
+        <mat-expansion-panel-header>
+                <mat-panel-title>
+                   <h4>{{ header }} </h4>
+                </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-grid-list cols="7" rowHeight="4:1">
+                <mat-grid-tile *ngFor="let filterTile of filterTiles" class="filter-tile">
+                        <button 
+                        *ngIf="category === 'byGenre'" 
+                        mat-raised-button 
+                        [class.active]="activeTile === filterTile" 
+                        (click)="selectGenre(filterTile)">
+                        {{ filterTile }}
+                      </button>
+                      <button 
+                        *ngIf="category === 'byLanguage'" 
+                        mat-raised-button 
+                        [class.active]="activeTile === filterTile" 
+                        (click)="selectLanguage(filterTile)">
+                        {{ filterTile }}
+                      </button>
+                </mat-grid-tile>
+        </mat-grid-list> 
+    </mat-expansion-panel>
+  </mat-accordion>

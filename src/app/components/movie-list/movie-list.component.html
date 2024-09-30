@@ -1,32 +1,28 @@
-<input type="text" [(ngModel)]="searchString" (ngModelChange)="filterMovies('byString', searchString)" placeholder="Search movies...">
+<mat-card class="movie-list-container">
+  <mat-card-content>
+    <mat-form-field class="search-form-field">
+      <mat-label class="search-label">Search movie by title, actors, director and plot</mat-label>
+      <input matInput type="text" [(ngModel)]="searchString" (ngModelChange)="filterMovies('byString', searchString)" placeholder="Search movies...">
+      @if (searchString) {
+        <button matSuffix mat-icon-button aria-label="Clear" (click)="filterMovies('byString', '')">
+          <mat-icon>close</mat-icon>
+        </button>
+      }
+    </mat-form-field>
 <div>
-  <h4>Filter by Genre:</h4>
-  <ul>
-    <li *ngFor="let genreFilter of genreFilterState">
-      {{genreFilter}}
-    </li>
-  </ul>
-  <div>
-    <div *ngFor="let genre of genres" class="genres-box">
-      <input type="button" value="{{genre}}" (click)="filterMovies('byGenre', genre)"/>
-    </div>
-  </div>
-  <h4>Filter By Language:</h4>
-  <ul>
-    <li *ngFor="let languageFilter of languageFilterState">
-      {{languageFilter}}
-    </li>
-  </ul>
-  <div>
-    <div *ngFor="let language of languages" class="genres-box">
-      <input type="button" value="{{language}}" (click)="filterMovies('byLanguage', language)"/>
-    </div>
-  </div>
+  <app-filter-accordion [header]="accordionHeader" [filterTiles]="genres" [category]="'byGenre'" (genreSelected)="updateFilter($event)"></app-filter-accordion>
+  <app-filter-accordion [header]="accordionHeader2" [filterTiles]="languages" [category]="'byLanguage'" (genreSelected)="updateFilter($event)"></app-filter-accordion>
 </div>
-<ul>
+<div *ngIf="filteredMovies.length === 0" class="not-found">
+  <h3>No movies found</h3>
+  <button matSuffix mat-icon-button aria-label="Clear" (click)="reset()" class="reset-btn">
+    Reset the search<mat-icon>close</mat-icon>
+  </button>
+</div>
+<ul *ngIf="filteredMovies.length > 0">
   <li *ngFor="let movie of filteredMovies" class="movie-list-item">
     <div class="movie-box">
-      <h4>{{ movie.Title }} ({{ movie.Year }})</h4>
+      <h3>{{ movie.Title }} ({{ movie.Year }})</h3>
       <p>Director: {{movie.Director}}</p>
       <p>Genres: <b>{{ movie.Genre }}</b></p>
       <p>Language: <b>{{ movie.Language }}</b></p>
@@ -35,6 +31,7 @@
         <i>{{movie.Plot}}</i>
       </div>
     </div>
-   
   </li>
 </ul>
+</mat-card-content>
+</mat-card>
