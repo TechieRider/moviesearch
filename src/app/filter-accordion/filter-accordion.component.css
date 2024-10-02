@@ -1,6 +1,7 @@
 
 
 button {
+    background-color: #ff7e5f;
     background: linear-gradient(135deg, #ff7e5f, #feb47b);
     border: none; 
     color: white;
@@ -16,6 +17,7 @@ button {
   }
   
   button:hover {
+    background-color: #feb47b;
     background: linear-gradient(135deg, #feb47b, #ff7e5f);
     box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
     transform: translateY(-3px);
