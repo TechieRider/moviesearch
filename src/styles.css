@@ -3,6 +3,7 @@
 html, body { height: 100%; }
 
 body {
+    background-color: #6a11cb;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
     background-size: 400% 400%;
     
@@ -10,7 +11,7 @@ body {
     
     margin: 0;
     padding: 0;
-    min-height: 100vh;
+    height: auto;
     
     color: white;
     font-family: 'Roboto', sans-serif;

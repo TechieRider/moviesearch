@@ -19,6 +19,7 @@
     Reset the search<mat-icon>close</mat-icon>
   </button>
 </div>
+<div class="movies-list">
 <ul *ngIf="filteredMovies.length > 0">
   <li *ngFor="let movie of filteredMovies" class="movie-list-item">
     <div class="movie-box">
@@ -33,5 +34,6 @@
     </div>
   </li>
 </ul>
+</div>
 </mat-card-content>
 </mat-card>
